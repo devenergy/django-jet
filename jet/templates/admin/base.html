@@ -36,16 +36,6 @@
 
 {% block extrahead %}{% endblock %}
 
-<!-- extrahead section reloads jQuery which will destroy jQuery-ui :(
-     without AJAX_SELECT_BOOTSTRAP=False setting, django-ajax-select will fallback to load other (old) jQuery-ui from CDN
-     zvolsky: I prefer prevent this (by using of the setting) and I will correct jQuery-ui and ajax_select initialization now
-
-repair some damages from extrahead section
--->
-<script type="text/javascript" src="{% static 'jquery-ui/js/jquery-ui.min.js' %}"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'jquery-ui/css/jquery-ui.min.css' %}" />
-<script type="text/javascript" src="/static/ajax_select/js/ajax_select.js"></script>
-
 <!--
   zvolsky: I was not able eliminate the jQuery duplicate: v1.12.4 from bundle and v3.3.1 from contrib/admin
       # TODO: maybe it could be eliminated using browserify + require() to reuse the jQuery-ui from bundle ?
