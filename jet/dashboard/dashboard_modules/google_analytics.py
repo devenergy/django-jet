@@ -101,7 +101,7 @@ class GoogleAnalyticsClient:
     def set_analytics_service(self, credential):
         http = httplib2.Http()
         http = credential.authorize(http)
-        self.analytics_service = build('analytics', 'v3', http=http)
+        self.analytics_service = build('analytics', 'v4', http=http)
 
     def api_profiles(self):
         if self.analytics_service is None:
