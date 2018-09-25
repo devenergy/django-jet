@@ -1,6 +1,8 @@
 # encoding: utf-8
 import datetime
 import json
+import threading
+
 from django import forms
 try:
     from django.core.urlresolvers import reverse
@@ -41,6 +43,7 @@ class ModuleCredentialStorage(Storage):
     def __init__(self, module):
         super(ModuleCredentialStorage, self).__init__()
         self.module = module
+        self._lock = threading.Lock()
 
     def locked_get(self):
         pass
@@ -305,6 +308,8 @@ class GoogleAnalyticsBase(DashboardModule):
                 error = _('API request failed.')
                 if isinstance(e, AccessTokenRefreshError):
                     error += _(' Try to <a href="%s">revoke and grant access</a> again') % reverse('jet-dashboard:update_module', kwargs={'pk': self.model.pk})
+                else:
+                    error += str(e)
                 self.error = mark_safe(error)
 
 
